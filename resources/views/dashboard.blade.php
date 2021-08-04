@@ -11,8 +11,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <span class="text-2xl">File Downloads:</span>
                     <ul class="py-4">
-                        <li><a href="google.com" class="py-2">Installer.exe</a></li>
-                        <li><a href="google.com" class="py-2">User Manual.pdf</a></li>
+                        @foreach ($downloads as $download)
+                        <li><a href="{{ route('download', $download->id) }}" class="py-2">{{ $download->name ?: '' }} </a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

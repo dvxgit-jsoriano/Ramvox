@@ -15,7 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $downloads = Download::all();
+
+        return view('dashboard', compact('downloads'));
     }
 
     /**

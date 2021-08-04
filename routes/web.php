@@ -19,11 +19,13 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('/dashboard', function() {
+    /* Route::get('/dashboard', function() {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard'); */
 
-    Route::get('/download/{id}', [DashboardController::class, 'download']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/download/{id}', [DashboardController::class, 'download'])->name('download');
 });
 
 require __DIR__.'/auth.php';
