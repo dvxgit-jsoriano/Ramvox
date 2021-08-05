@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Models\Download;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,15 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/download/{id}', [DashboardController::class, 'download'])->name('download');
+});
+
+
+Route::get('/test', function () {
+    $user = User::find(2);
+    //dd($user->downloads());
+    foreach ($user->downloads as $download) {
+       echo $download->name;
+    }
 });
 
 require __DIR__.'/auth.php';
