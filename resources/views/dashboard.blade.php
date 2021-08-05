@@ -12,7 +12,7 @@
                     <span class="text-2xl">File Downloads:</span>
                     <ul class="py-4">
                         @foreach ($downloads as $download)
-                        <li><a href="{{ route('download', $download->id) }}" class="py-2">{{ $download->name ?: '' }} </a></li>
+                        <li><a href="{{ route('download', $download->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $download->name ?: '' }} </a> - {{ $download->desc }}</li>
                         @endforeach
                     </ul>
                 </div>
