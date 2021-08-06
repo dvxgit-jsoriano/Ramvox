@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileManagerController;
+use App\Http\Controllers\FileUploadController;
 use App\Models\Download;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -31,12 +33,30 @@ Route::middleware(['auth'])->group(function() {
 });
 
 
-Route::get('/test', function () {
+Route::get('/testDownloadsPerUser', function () {//for previewing downloads per user
     $user = User::find(2);
     //dd($user->downloads());
     foreach ($user->downloads as $download) {
        echo $download->name;
     }
 });
+
+Route::get('/testUsersPerDownload', function () {   ///for previewing users permitted to a file
+    $download = Download::find(2);
+    //dd($download->users());
+    foreach ($download->users as $user){
+        echo $user->name;
+    }
+});
+
+Route::get('/testAllUsers', function () {   ///for previewing all users
+    $users = User::all();//paginate(2);
+    //dd($user->downloads());
+    foreach ($users as $user) {
+       echo $user->name;
+    }
+});
+
+Route::get('/filemanager', [FileManagerController::class, 'index'])->name('File Upload');
 
 require __DIR__.'/auth.php';
