@@ -1,7 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -16,18 +16,49 @@
                     <span class="text-2xl">Users:</span>
                     <ul class="py-4">
                         @php
-                            $users=App\Models\User::all();
+                        $users=App\Models\User::all();
                         @endphp
                         @foreach ($users as $user)
-                            <li>
-                                <a href="{{ route('download', $user->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $user->name ?: '' }} </a>
-                                <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
-                                @foreach ($user->downloads as $download)
-                                    <li><a href="{{ route('download', $download->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $download->name ?: '' }} </a> - {{ $download->desc }}</li>
-                                @endforeach
-                            </li>
+                        <li>
+                            <a href="{{ route('download', $user->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $user->name ?: '' }} </a>
+                            <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+                            @foreach ($user->downloads as $download)
+                        <li><a href="{{ route('download', $download->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $download->name ?: '' }} </a> - {{ $download->desc }}</li>
+                        @endforeach
+                        </li>
                         @endforeach
                     </ul>
+
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr class="bg-green-800 text-white">
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email Address</th>
+                                <th>Download List(s)</th>
+                                <th>Action(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <ul class="list-disc">
+                                        @foreach ($user->downloads as $download)
+                                        <li>{{ $download->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td><a href="#">Manage Downloads</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $users->links() }} <!-- This will display paginator if records exceeds paging size -->
+
                 </div>
             </div>
         </div>
