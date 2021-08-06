@@ -1,7 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
