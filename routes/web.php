@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FileManagerController;
-use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\DownloadManagementController;
+use App\Http\Controllers\UserManagementController;
 use App\Models\Download;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +57,7 @@ Route::get('/testAllUsers', function () {   ///for previewing all users
     }
 });
 
-Route::get('/filemanager', [FileManagerController::class, 'index'])->name('File Upload');
+Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('File Upload');
+Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('users');
 
 require __DIR__.'/auth.php';

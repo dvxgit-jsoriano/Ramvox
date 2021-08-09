@@ -1,11 +1,7 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('File Manager') }}
+            {{ __('User Management') }}
         </h2>
     </x-slot>
 
@@ -18,7 +14,7 @@
                         @php
                         $users=App\Models\User::all();
                         @endphp
-                        @foreach ($users as $user)
+                        {{-- @foreach ($users as $user)
                         <li>
                             <a href="{{ route('download', $user->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $user->name ?: '' }} </a>
                             <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
@@ -26,7 +22,7 @@
                         <li><a href="{{ route('download', $download->id) }}" class="py-2 font-bold text-blue-800 hover:text-blue-500">{{ $download->name ?: '' }} </a> - {{ $download->desc }}</li>
                         @endforeach
                         </li>
-                        @endforeach
+                        @endforeach --}}
                     </ul>
 
                     <table class="table-auto w-full">
@@ -52,18 +48,15 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td><a href="#">Manage Downloads</a></td>
+                                <td><a href="{{ route('download', $user->id) }}">Manage Downloads</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->links() }} <!-- This will display paginator if records exceeds paging size -->
+                   {{--  {{ $users->links() }} --}} <!-- This will display paginator if records exceeds paging size -->
 
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-<script>
-    $('#fileupload').fileupload();
-</script>
