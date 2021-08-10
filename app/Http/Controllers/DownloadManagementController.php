@@ -17,7 +17,7 @@ class DownloadManagementController extends Controller
     public function index($id)
     {
         $user = User::find($id);
-        $downloads = Download::all();
+        $downloads = $user->downloads;
         return view('DownloadManagement', compact('downloads'));
     }
 

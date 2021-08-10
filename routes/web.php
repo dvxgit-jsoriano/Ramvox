@@ -58,6 +58,6 @@ Route::get('/testAllUsers', function () {   ///for previewing all users
 });
 
 Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('File Upload');
-Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('users');
+Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('download');
 
 require __DIR__.'/auth.php';
