@@ -93,4 +93,12 @@ class DownloadManagementController extends Controller
 
         return Storage::download($download->link);
     }
+    public function attachDownload(Request $request){
+        $user = User::find($request->user_id);
+        return $user->downloads()->attach($request->download_id);
+    }
+    public function detachDownload(Request $request){
+        $user = User::find($request->user_id);
+        return $user->downloads()->detach($request->download_id);
+    }
 }

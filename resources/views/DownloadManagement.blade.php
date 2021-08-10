@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -55,10 +56,10 @@
                                                         {{-- {{$select=$download->users->where('id',$user_id)->get("download_id",$download->id)}} --}}
                                                         
                                                         @if(count($download->users->where('id',$user_id))!=0/* $download->id == $select */)
-                                                            <input type="checkbox" class="form-checkbox" checked>
+                                                            <input type="checkbox" id={{"checkbox".$download->id}} class="form-checkbox" checked onclick="AddDownload($(this).prop('id'));">
                                                    
                                                         @else
-                                                            <input type="checkbox" class="form-checkbox">
+                                                            <input type="checkbox" id={{"checkbox".$download->id}} class="form-checkbox" onclick="AddDownload($(this).prop('id'));">
                                                         @endif
                                                         
                                                     </div>
@@ -134,3 +135,23 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+function AddDownload($id){
+    let $status=$("#"+$id).is(":checked");
+    $id=$id.replace("checkbox", "");
+    if($status){
+        $.ajax({
+            type: "POST",
+            url:  "{{url('addDownload')}}",
+            data: {"_token": "{{ csrf_token() }}", "user_id":"{{$user_id}}", "download_id":$id}
+        });
+    }
+    else{
+        $.ajax({
+            type: "POST",
+            url:  "{{url('removeDownload')}}",
+            data: {"_token": "{{ csrf_token() }}", "user_id":"{{$user_id}}", "download_id":$id}
+        });
+    }
+}
+</script>
