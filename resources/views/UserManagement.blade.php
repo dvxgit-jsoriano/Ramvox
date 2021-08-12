@@ -48,7 +48,7 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td><a href="{{ route('download', $user->id) }}">Manage Downloads</a></td>
+                                <td><a href="{{ route('downloads', $user->id) }}">Manage Downloads</a></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -58,7 +58,7 @@ Route::get('/testAllUsers', function () {   ///for previewing all users
 });
 
 Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('File Upload');
-Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('download');
+Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
 Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
 Route::post('/removeDownload', [DownloadManagementController::class, 'detachDownload']);
 require __DIR__.'/auth.php';
