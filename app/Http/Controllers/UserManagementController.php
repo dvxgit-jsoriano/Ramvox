@@ -27,7 +27,7 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        //
+        return view('UserManagementCreate');
     }
 
     /**
