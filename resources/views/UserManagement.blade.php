@@ -9,10 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <span class="text-2xl">Users:</span>
-                    <ul class="py-4">
+                   {{--  <ul class="py-4"> --}}
                         @php
-                        $users=App\Models\User::all();
+                            $users = App\Models\User::all();
                         @endphp
                         {{-- @foreach ($users as $user)
                         <li>
@@ -23,38 +22,80 @@
                         @endforeach
                         </li>
                         @endforeach --}}
-                    </ul>
-
-                    <table class="table-auto w-full">
-                        <thead>
-                            <tr class="bg-green-800 text-white">
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Email Address</th>
-                                <th>Download List(s)</th>
-                                <th>Action(s)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                            <tr>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    <ul class="list-disc">
-                                        @foreach ($user->downloads as $download)
-                                        <li>{{ $download->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
-                                <td><a href="{{ route('downloads', $user->id) }}">Manage Downloads</a></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                   {{--  {{ $users->links() }} --}} <!-- This will display paginator if records exceeds paging size -->
-
+                  {{--   </ul> --}}
+                    <div class="flex flex-col text-left">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="divide-y divide-gray-200 table-auto w-full">
+                                        <thead class="bg-gray-50">
+                                            <tr class="bg-green-800 text-white">
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                                                    Username
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                                                    Name
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                                                    Email Address
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                                                    Download List(s)
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                                                    Action(s)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $user->username }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $user->name }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $user->email }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm text-gray-500">
+                                                            <ul class="list-disc">
+                                                                @foreach ($user->downloads as $download)
+                                                                    <li>{{ $download->name }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="px-2 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                            <a href="{{ route('downloads', $user->id) }}">Manage
+                                                                Downloads
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{-- {{ $users->links() }} --}}
+                                    <!-- This will display paginator if records exceeds paging size -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
