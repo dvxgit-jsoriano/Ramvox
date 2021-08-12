@@ -90,6 +90,8 @@ class DashboardController extends Controller
     {
         $download = Download::find($id);
 
-        return Storage::download($download->link);
+        //return Storage::download($download->link);
+        // above code was REPLACED by below code for handling large file size
+        return response()->download(storage_path("app/") . $download->link);
     }
 }
