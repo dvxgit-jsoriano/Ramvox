@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class DownloadController extends Controller
 {
@@ -35,7 +36,33 @@ class DownloadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* $validatedData = $request->validate([
+            'files' => 'required',
+            'files.*' => 'mimes:csv,txt,xlx,xls,pdf,octet-stream,vnd.rar'
+            ]); */
+            $this->validate($request, [
+                'files' => 'required',
+                'files.*' => 'required'
+            ]);
+     
+     
+            if($request->hasfile('files'))
+             {
+                foreach($request->file('files') as $key => $file)
+                {
+                    $name = $file->getClientOriginalName();
+                    $link = $file->storeAs('',$name);//store in storage folder
+                    $insert[$key]['name'] = $name;
+                    $insert[$key]['desc'] = $name;
+                    $insert[$key]['link'] = $link;
+     
+                }
+             }
+     
+            Download::insert($insert);
+     
+            return back()->with('success', 'FIles uploaded sucessfully!');
+     
     }
 
     /**

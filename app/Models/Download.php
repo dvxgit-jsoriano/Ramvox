@@ -13,8 +13,4 @@ class Download extends Model
         return $this->belongsToMany(User::class, "user_downloads","download_id","user_id");
 
     }
-    public function setFilenamesAttribute($value)
-    {
-        $this->attributes['filenames'] = json_encode($value);
-    }
 }

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\DownloadManagementController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserManagementController;
 use App\Models\Download;
 use App\Models\User;
@@ -61,4 +63,6 @@ Route::get('/usermanagement', [UserManagementController::class, 'index'])->name(
 Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
 Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
 Route::post('/removeDownload', [DownloadManagementController::class, 'detachDownload']);
+Route::get('/Upload', [UploadController::class, 'index'])->name('Upload');
+Route::post('save-multiple-files', [DownloadController::class, 'store']);
 require __DIR__.'/auth.php';
