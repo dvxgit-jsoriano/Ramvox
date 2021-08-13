@@ -13,6 +13,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (Auth::user()->id==0)
+                        <x-nav-link :href="route('user-management')" :active="request()->routeIs('user-management')">
+                            {{ __('User Management') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('Upload')" :active="request()->routeIs('Upload')">
+                            {{ __('File Upload') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
