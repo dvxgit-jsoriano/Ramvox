@@ -26,8 +26,8 @@
     </style>
 <x-app-layout>
     @if(session('success'))
-    <div class="relative">
-        <div class='fixed right-0 -my-56 z-50 flex items-center text-white max-w-sm w-full bg-green-400 shadow-md rounded-lg overflow-hidden transition delay-1000 duration-1000 ease-in-out transform translate-y-28 '>
+    <div class="relative" id="notif" hidden>
+        <div class='fixed right-0 top-1 z-50 flex items-center text-white max-w-sm w-full bg-green-400 shadow-md rounded-lg overflow-hidden'>{{--  transition delay-1000 duration-1000 ease-in-out transform translate-y-28 --}}
             <div class='w-10 border-r px-2'>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -364,5 +364,13 @@ document.getElementById("cancel").onclick = () => {
   gallery.append(empty);
 };
 
+$(document).ready(function(){
+    $("#notif").fadeIn(500, function(){
+        setTimeout(function(){
+            $("#notif").fadeOut(500);
+        },3000);
+        
+    });
+});
 </script>
 
