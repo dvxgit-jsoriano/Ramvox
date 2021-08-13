@@ -10,10 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex place-content-center p-2 bg-white border-b border-gray-200">
 
-                    <!-- User Management Add -->
+                    <!-- User Management Edit -->
                     <div class="w-full md:w-1/2 py-2">
 
-                        <h4 class="text-center my-2">Add A User</h4>
+                        <h4 class="text-center my-2">Edit A User</h4>
 
                         @if (session('status'))
                         <div class="alert-class bg-blue-100 border border-blue-400 text-blue-900 px-4 py-3 mb-2 rounded relative" role="alert">
@@ -28,35 +28,36 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('user-store') }}" method="post" class="bg-white shadow-md rounded px-4 pb-4 mb-4">
+                        <form action="{{ url('usermanagement-update', ['id' => $user->id]) }}" method="post" class="bg-white shadow-md rounded px-4 pb-4 mb-4">
+                            @method('PUT')
                             {{ csrf_field() }}
 
                             <!-- Name -->
                             <div>
                                 <x-label for="name" :value="__('Name')" />
 
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="" required autofocus />
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $user->name }}" required autofocus />
                             </div>
 
                             <!-- Username -->
                             <div class="mt-4">
                                 <x-label for="username" :value="__('Username')" />
 
-                                <x-input id="username" class="block mt-1 w-full" type="text" name="username" value="" required />
+                                <x-input id="username" class="block mt-1 w-full" type="text" name="username" value="{{ $user->username }}" required />
                             </div>
 
                             <!-- Email Address -->
                             <div class="mt-4">
                                 <x-label for="email" :value="__('Email')" />
 
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="" />
+                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ $user->email }}" />
                             </div>
 
                             <!-- Password -->
                             <div class="mt-4">
                                 <x-label for="password" :value="__('Password')" />
 
-                                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required/>
                             </div>
 
                             <div class="flex items-center justify-end mt-4">
@@ -71,8 +72,8 @@
 
                         </form>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>

@@ -59,8 +59,13 @@ Route::get('/testAllUsers', function () {   ///for previewing all users
     }
 });
 
+Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('user-management');
 Route::get('/usermanagement-create', [UserManagementController::class, 'create'])->name('user-create');
-Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('File Upload');
+Route::get('/usermanagement-edit/{id}', [UserManagementController::class, 'edit'])->name('user-edit');
+Route::post('/usermanagement', [UserManagementController::class, 'store'])->name('user-store');
+Route::put('/usermanagement-update/{id}', [UserManagementController::class, 'update'])->name('user-update');
+Route::delete('/usermanagement-delete/{id}', [UserManagementController::class, 'destroy'])->name('user-delete');
+
 Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
 Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
 Route::post('/removeDownload', [DownloadManagementController::class, 'detachDownload']);

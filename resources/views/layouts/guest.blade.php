@@ -20,5 +20,14 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+
+        <script>
+            function closeAlert()
+            {
+                var x = document.getElementsByClassName("alert-class");
+                x[0].classList.add("hidden");
+                //$(".alert-class").addClass("hidden");
+            }
+        </script>
     </body>
 </html>
