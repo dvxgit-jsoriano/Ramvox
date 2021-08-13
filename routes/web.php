@@ -29,46 +29,25 @@ Route::middleware(['auth'])->group(function() {
         return view('dashboard');
     })->name('dashboard'); */
 
+    //Main UI for Users
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    //Downloading route
     Route::get('/download/{id}', [DashboardController::class, 'download'])->name('download');
+    //User management CRUD
+    Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('user-management');
+    Route::get('/usermanagement-create', [UserManagementController::class, 'create'])->name('user-create');
+    Route::get('/usermanagement-edit/{id}', [UserManagementController::class, 'edit'])->name('user-edit');
+    Route::post('/usermanagement', [UserManagementController::class, 'store'])->name('user-store');
+    Route::put('/usermanagement-update/{id}', [UserManagementController::class, 'update'])->name('user-update');
+    Route::delete('/usermanagement-delete/{id}', [UserManagementController::class, 'destroy'])->name('user-delete');
+    //Download management for selected user from user management
+    Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
+    //Adding download for specific user
+    Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
+    //Removing download for specific user
+    Route::post('/removeDownload', [DownloadManagementController::class, 'detachDownload']);
+    //Uploading of files
+    Route::get('/Upload', [UploadController::class, 'index'])->name('Upload');
+    Route::post('save-multiple-files', [DownloadController::class, 'store']);
 });
-
-
-Route::get('/testDownloadsPerUser', function () {//for previewing downloads per user
-    $user = User::find(2);
-    //dd($user->downloads());
-    foreach ($user->downloads as $download) {
-       echo $download->name;
-    }
-});
-
-Route::get('/testUsersPerDownload', function () {   ///for previewing users permitted to a file
-    $download = Download::find(2);
-    //dd($download->users());
-    foreach ($download->users as $user){
-        echo $user->name;
-    }
-});
-
-Route::get('/testAllUsers', function () {   ///for previewing all users
-    $users = User::all();//paginate(2);
-    //dd($user->downloads());
-    foreach ($users as $user) {
-       echo $user->name;
-    }
-});
-
-Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('user-management');
-Route::get('/usermanagement-create', [UserManagementController::class, 'create'])->name('user-create');
-Route::get('/usermanagement-edit/{id}', [UserManagementController::class, 'edit'])->name('user-edit');
-Route::post('/usermanagement', [UserManagementController::class, 'store'])->name('user-store');
-Route::put('/usermanagement-update/{id}', [UserManagementController::class, 'update'])->name('user-update');
-Route::delete('/usermanagement-delete/{id}', [UserManagementController::class, 'destroy'])->name('user-delete');
-
-Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
-Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
-Route::post('/removeDownload', [DownloadManagementController::class, 'detachDownload']);
-Route::get('/Upload', [UploadController::class, 'index'])->name('Upload');
-Route::post('save-multiple-files', [DownloadController::class, 'store']);
 require __DIR__.'/auth.php';

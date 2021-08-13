@@ -72,6 +72,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->id==0)
+                        <x-responsive-nav-link :href="route('user-management')" :active="request()->routeIs('user-management')">
+                            {{ __('User Management') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('Upload')" :active="request()->routeIs('Upload')">
+                            {{ __('File Upload') }}
+                        </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
