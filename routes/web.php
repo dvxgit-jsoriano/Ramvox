@@ -59,6 +59,7 @@ Route::get('/testAllUsers', function () {   ///for previewing all users
     }
 });
 
+Route::get('/usermanagement-create', [UserManagementController::class, 'create'])->name('user-create');
 Route::get('/usermanagement', [UserManagementController::class, 'index'])->name('File Upload');
 Route::get('/downloadmanagement/{id}', [DownloadManagementController::class, 'index'])->name('downloads');
 Route::post('/addDownload', [DownloadManagementController::class, 'attachDownload']);
